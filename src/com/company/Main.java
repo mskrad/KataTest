@@ -73,14 +73,15 @@ public class Main {
                     y = romeToArab(numberMap, input.substring(yStartIndex, yEndIndex));
                     rome = true;
                 }
+
                 if (x > 10 | y > 10 | x < 1 | y < 1) throw new Exception("Работать можно только с числами от 1 до 10");
 
-                Integer result = opType.action(x, y);
+                Integer result = opType.action(x, y); //само вычисление
 
-                if (rome == false) return result.toString();
+                if (!rome) return result.toString(); //если арабские числа, то просто выводим
                 else {
-                    if (result > 0) {
-                        return arabToRome(numberMap, result);
+                    if (result > 0) { //проверяем на положительность
+                        return arabToRome(numberMap, result); //выводим с помощью метода поиска ключа по значению
                     } else throw new Exception("Результатом работы с римскими цифрами может быть только положительные числа");
                 }
 
@@ -91,18 +92,18 @@ public class Main {
         return "программа отработала с ошибкой.";
     }
 
-     public static <K, V>  int romeToArab(Map<K, V> map,String romeNumber) throws Exception {
+     public static <K, V>  int romeToArab(Map<K, V> map,String romeNumber) throws Exception { //обычный поиск значения по ключу
         int result;
         try{
-            result = (int) map.get(romeNumber.toUpperCase(Locale.ROOT));
-        } catch (Exception e) {
+            result = (int) map.get(romeNumber.toUpperCase(Locale.ROOT)); //некрасиво, но вроде работает
+        } catch (Exception e) { //опять же некрасиво, конечно, что множество ошибок ввода отлавливаются в одном catch
             throw new Exception("Допустимы только единовременно только римские, либо арабские, и никакие другие символы; обязательно в формате 'два операнда и один оператор'");
         }
         return result;
      }
 
 
-    public static <K, V> K arabToRome(Map<K, V> map, int arabNumber) {
+    public static <K, V> K arabToRome(Map<K, V> map, int arabNumber) { //поиск ключа по значению
         for (Map.Entry<K, V> entry : map.entrySet()) {
             if (entry.getValue().equals(arabNumber)) {
                 return entry.getKey();
@@ -111,7 +112,7 @@ public class Main {
         return null;
     }
 
-    enum Operation{
+    enum Operation{ //Операции
         SUM{
             public int action(int x, int y){ return x + y;}
         },
