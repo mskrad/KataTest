@@ -15,17 +15,17 @@ public class Main {
         System.out.println("Результат: " + calc(input));
     }
 
-    private static String fillMap(Integer arabNumber){
+    private static String fillMap(Integer arabNumber){ //заполнение мэпы (чтобы не заполнять вручную и не менять сам алгоритм основанный на мэпе)
         String[] basicNumbers = {"I", "V", "X", "L", "C"};
         int dozens, units;
 
         dozens = arabNumber/10;
         units = arabNumber%10;
 
-        return createUnits(units,basicNumbers) + createDozens(dozens, basicNumbers);
+        return  createDozens(dozens, basicNumbers) + createUnits(units,basicNumbers);
     }
 
-    private static String createDozens(Integer dozens, String[] basicNumbers){
+    private static String createDozens(Integer dozens, String[] basicNumbers){ //десятки
         String strDozens = "Error";
         if (dozens == 0)
             strDozens = "";
@@ -53,7 +53,7 @@ public class Main {
         return strDozens;
     }
 
-    private static String createUnits(Integer units, String[] basicNumbers){
+    private static String createUnits(Integer units, String[] basicNumbers){ //единицы
         String strUnits = "Error";
         if (units == 0)
             strUnits = "";
