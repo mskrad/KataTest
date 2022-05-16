@@ -15,29 +15,76 @@ public class Main {
         System.out.println("Результат: " + calc(input));
     }
 
+    private static String fillMap(Integer arabNumber){
+        String[] basicNumbers = {"I", "V", "X", "L", "C"};
+        int dozens, units;
+
+        dozens = arabNumber/10;
+        units = arabNumber%10;
+
+        return createUnits(units,basicNumbers) + createDozens(dozens, basicNumbers);
+    }
+
+    private static String createDozens(Integer dozens, String[] basicNumbers){
+        String strDozens = "Error";
+        if (dozens == 0)
+            strDozens = "";
+        else if (dozens == 1)
+            strDozens = basicNumbers[2];
+        else if (dozens == 2)
+            strDozens = basicNumbers[2] + basicNumbers[2];
+        else if (dozens == 3)
+            strDozens = basicNumbers[2] + basicNumbers[2] + basicNumbers[2];
+        else if (dozens == 4)
+            strDozens = basicNumbers[2] + basicNumbers[3];
+        else if (dozens == 5)
+            strDozens = basicNumbers[3];
+        else if (dozens == 6)
+            strDozens = basicNumbers[3] + basicNumbers[2];
+        else if (dozens == 7)
+            strDozens = basicNumbers[3] + basicNumbers[2] + basicNumbers[2];
+        else if (dozens == 8)
+            strDozens = basicNumbers[3] + basicNumbers[2] + basicNumbers[2] + basicNumbers[2];
+        else if (dozens == 9)
+            strDozens = basicNumbers[2] + basicNumbers[4];
+        else if (dozens == 10)
+            strDozens = basicNumbers[4];
+
+        return strDozens;
+    }
+
+    private static String createUnits(Integer units, String[] basicNumbers){
+        String strUnits = "Error";
+        if (units == 0)
+            strUnits = "";
+        else if (units == 1)
+            strUnits = basicNumbers[0];
+        else if (units == 2)
+            strUnits = basicNumbers[0] + basicNumbers[0];
+        else if (units == 3)
+            strUnits = basicNumbers[0] + basicNumbers[0] + basicNumbers[0];
+        else if (units == 4)
+            strUnits = basicNumbers[0] + basicNumbers[1];
+        else if (units == 5)
+            strUnits = basicNumbers[1];
+        else if (units == 6)
+            strUnits = basicNumbers[1] + basicNumbers[0];
+        else if (units == 7)
+            strUnits = basicNumbers[1] + basicNumbers[0] + basicNumbers[0];
+        else if (units == 8)
+            strUnits = basicNumbers[1] + basicNumbers[0] + basicNumbers[0] + basicNumbers[0];
+        else if (units == 9)
+            strUnits = basicNumbers[0] + basicNumbers[2];
+
+        return strUnits;
+    }
+
     public static String calc(String input) {
         try {
             Map<String, Integer> numberMap = new HashMap<>(); //для конвертера
-            numberMap.put("I"  ,    1);
-            numberMap.put("II" ,    2);
-            numberMap.put("III",    3);
-            numberMap.put("IV" ,    4);
-            numberMap.put("V" ,     5);
-            numberMap.put("VI" ,    6);
-            numberMap.put("VII" ,   7);
-            numberMap.put("VIII" ,  8);
-            numberMap.put("IX" ,    9);
-            numberMap.put("X" ,    10);
-            numberMap.put("XI"  ,  11);
-            numberMap.put("XII" ,  12);
-            numberMap.put("XIII",  13);
-            numberMap.put("XIV" ,  14);
-            numberMap.put("XV" ,   15);
-            numberMap.put("XVI" ,  16);
-            numberMap.put("XVII" , 17);
-            numberMap.put("XVIII" ,18);
-            numberMap.put("XIX" ,  19);
-            numberMap.put("XX" ,   20);
+            for (int i = 1; i <= 100; i++){
+                numberMap.put(fillMap(i), i);
+            }
 
             input = input.replace(" ", ""); //убираем пробелы, для того, чтобы привести всё к одному виду
 
